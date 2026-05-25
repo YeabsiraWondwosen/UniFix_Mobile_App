@@ -1,0 +1,385 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/bg_university"
+    android:fitsSystemWindows="true">
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/screen_overlay" />
+
+    <LinearLayout
+        android:id="@+id/topNavBar"
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:layout_alignParentTop="true"
+        android:background="@color/unifix_blue"
+        android:elevation="6dp"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingHorizontal="16dp">
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/navTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="UniFix Teacher"
+                android:textColor="#FFFFFF"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/tvTeacherName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:ellipsize="end"
+                android:maxLines="1"
+                android:text="Welcome"
+                android:textColor="#E0E0E0"
+                android:textSize="12sp" />
+        </LinearLayout>
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp">
+
+            <Button
+                android:id="@+id/btnBell"
+                android:layout_width="45dp"
+                android:layout_height="45dp"
+                android:backgroundTint="@color/input_background"
+                android:insetLeft="0dp"
+                android:insetTop="0dp"
+                android:insetRight="0dp"
+                android:insetBottom="0dp"
+                android:padding="0dp"
+                app:cornerRadius="22dp"
+                android:text="🛎️"
+                android:textSize="20sp" />
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/badgeContainer"
+                android:layout_width="18dp"
+                android:layout_height="18dp"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentTop="true"
+                app:cardBackgroundColor="#dc3545"
+                app:cardCornerRadius="9dp"
+                app:cardElevation="2dp"
+                android:visibility="gone">
+
+                <TextView
+                    android:id="@+id/tvGlobalAlertBadge"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:text="0"
+                    android:textColor="#FFFFFF"
+                    android:textSize="10sp"
+                    android:textStyle="bold" />
+            </androidx.cardview.widget.CardView>
+        </RelativeLayout>
+
+        <Button
+            android:id="@+id/btnSettings"
+            android:layout_width="45dp"
+            android:layout_height="45dp"
+            android:backgroundTint="#6c757d"
+            android:insetLeft="0dp"
+            android:insetTop="0dp"
+            android:insetRight="0dp"
+            android:insetBottom="0dp"
+            android:padding="0dp"
+            app:cornerRadius="22dp"
+            android:text="⚙️"
+            android:textColor="#FFFFFF"
+            android:textSize="20sp" />
+    </LinearLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/topNavBar"
+        android:fillViewport="true">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:padding="16dp">
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:cardBackgroundColor="@color/card_background"
+                app:cardCornerRadius="30dp"
+                app:cardElevation="8dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="24dp">
+
+                    <TextView
+                        android:id="@+id/warningBanner"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="16dp"
+                        android:background="#FFF3CD"
+                        android:padding="12dp"
+                        android:text="Warning: You have 0 strike(s). Reaching 3 results in a ban."
+                        android:textColor="#856404"
+                        android:visibility="gone" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="45dp"
+                        android:layout_marginBottom="24dp"
+                        android:orientation="horizontal"
+                        android:weightSum="2">
+
+                        <Button
+                            android:id="@+id/btnTabReport"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_marginEnd="4dp"
+                            android:layout_weight="1"
+                            android:backgroundTint="@color/unifix_blue"
+                            android:insetTop="0dp"
+                            android:insetBottom="0dp"
+                            android:text="Report Issue"
+                            android:textColor="#FFFFFF"
+                            android:textSize="12sp"
+                            android:textStyle="bold" />
+
+                        <Button
+                            android:id="@+id/btnTabHistory"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_marginStart="4dp"
+                            android:layout_weight="1"
+                            android:backgroundTint="@color/input_background"
+                            android:insetTop="0dp"
+                            android:insetBottom="0dp"
+                            android:text="My History"
+                            android:textColor="@color/text_primary"
+                            android:textSize="12sp"
+                            android:textStyle="bold" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/containerReportForm"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/tvFormTitle"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="16dp"
+                            android:text="Submit New Report"
+                            android:textColor="@color/unifix_blue"
+                            android:textSize="18sp"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/tvLabelCategory"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Category:"
+                            android:textColor="@color/text_primary"
+                            android:textStyle="bold" />
+
+                        <Spinner
+                            android:id="@+id/spinnerCategory"
+                            android:layout_width="match_parent"
+                            android:layout_height="50dp"
+                            android:layout_marginBottom="16dp"
+                            android:background="@color/input_background" />
+
+                        <TextView
+                            android:id="@+id/tvLabelPhone"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Contact Phone (required):"
+                            android:textColor="@color/text_primary"
+                            android:textStyle="bold" />
+
+                        <EditText
+                            android:id="@+id/etPhone"
+                            android:layout_width="match_parent"
+                            android:layout_height="50dp"
+                            android:layout_marginBottom="16dp"
+                            android:background="@color/input_background"
+                            android:hint="e.g. 09... / 07.../+251"
+                            android:textColor="@color/text_primary"
+                            android:textColorHint="@color/text_hint"
+                            android:inputType="phone"
+                            android:paddingHorizontal="16dp" />
+
+                        <LinearLayout
+                            android:id="@+id/dynamicMaterials"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="16dp"
+                            android:orientation="vertical"
+                            android:visibility="gone">
+                            <TextView android:id="@+id/tvLabelMaterials" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Material Details:" android:textColor="@color/text_primary" android:textStyle="bold" android:layout_marginBottom="8dp"/>
+                            <EditText android:id="@+id/etMatCourse" android:layout_width="match_parent" android:layout_height="50dp" android:background="@color/input_background" android:hint="Course Code/Name" android:textColor="@color/text_primary" android:textColorHint="@color/text_hint" android:paddingHorizontal="16dp" android:layout_marginBottom="8dp"/>
+                            <EditText android:id="@+id/etMatRoom" android:layout_width="match_parent" android:layout_height="50dp" android:background="@color/input_background" android:hint="Room Needed In" android:textColor="@color/text_primary" android:textColorHint="@color/text_hint" android:paddingHorizontal="16dp"/>
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/dynamicClassroom"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="16dp"
+                            android:orientation="vertical"
+                            android:visibility="gone">
+                            <TextView android:id="@+id/tvLabelClassroom" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Classroom Details:" android:textColor="@color/text_primary" android:textStyle="bold" android:layout_marginBottom="8dp"/>
+                            <EditText android:id="@+id/etClassRoom" android:layout_width="match_parent" android:layout_height="50dp" android:background="@color/input_background" android:hint="Block &amp; Room No." android:textColor="@color/text_primary" android:textColorHint="@color/text_hint" android:paddingHorizontal="16dp" android:layout_marginBottom="8dp"/>
+                            <EditText android:id="@+id/etClassBatch" android:layout_width="match_parent" android:layout_height="50dp" android:background="@color/input_background" android:hint="Affected Batch/Year" android:textColor="@color/text_primary" android:textColorHint="@color/text_hint" android:paddingHorizontal="16dp"/>
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/dynamicOffice"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="16dp"
+                            android:orientation="vertical"
+                            android:visibility="gone">
+                            <TextView android:id="@+id/tvLabelOffice" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Office Details:" android:textColor="@color/text_primary" android:textStyle="bold" android:layout_marginBottom="8dp"/>
+                            <EditText android:id="@+id/etOffBlock" android:layout_width="match_parent" android:layout_height="50dp" android:background="@color/input_background" android:hint="Block No." android:textColor="@color/text_primary" android:textColorHint="@color/text_hint" android:paddingHorizontal="16dp" android:layout_marginBottom="8dp"/>
+                            <EditText android:id="@+id/etOffNum" android:layout_width="match_parent" android:layout_height="50dp" android:background="@color/input_background" android:hint="Office No." android:textColor="@color/text_primary" android:textColorHint="@color/text_hint" android:paddingHorizontal="16dp"/>
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/dynamicTech"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="16dp"
+                            android:orientation="vertical"
+                            android:visibility="gone">
+
+                            <TextView android:id="@+id/tvLabelIct" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="ICT / Tech Details:" android:textColor="@color/text_primary" android:textStyle="bold" android:layout_marginBottom="8dp"/>
+
+                            <EditText android:id="@+id/etTechDevice" android:layout_width="match_parent" android:layout_height="50dp" android:background="@color/input_background" android:hint="Device Type (e.g. Projector)" android:textColor="@color/text_primary" android:textColorHint="@color/text_hint" android:paddingHorizontal="16dp" android:layout_marginBottom="8dp"/>
+
+                            <Spinner android:id="@+id/spinnerIctType" android:layout_width="match_parent" android:layout_height="50dp" android:background="@color/input_background" android:layout_marginBottom="8dp"/>
+
+                            <LinearLayout
+                                android:id="@+id/dynamicIctLab"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="vertical"
+                                android:visibility="gone">
+                                <EditText android:id="@+id/etIctBuilding" android:layout_width="match_parent" android:layout_height="50dp" android:background="@color/input_background" android:hint="Building Name/No." android:textColor="@color/text_primary" android:textColorHint="@color/text_hint" android:paddingHorizontal="16dp" android:layout_marginBottom="8dp"/>
+                                <EditText android:id="@+id/etIctRoom" android:layout_width="match_parent" android:layout_height="50dp" android:background="@color/input_background" android:hint="Room No." android:textColor="@color/text_primary" android:textColorHint="@color/text_hint" android:paddingHorizontal="16dp"/>
+                            </LinearLayout>
+
+                            <EditText android:id="@+id/etIctPlaceName" android:layout_width="match_parent" android:layout_height="50dp" android:background="@color/input_background" android:hint="Name of Place / Office" android:textColor="@color/text_primary" android:textColorHint="@color/text_hint" android:paddingHorizontal="16dp" android:visibility="gone"/>
+
+                            <EditText android:id="@+id/etTechLoc" android:layout_width="match_parent" android:layout_height="50dp" android:visibility="gone"/>
+                        </LinearLayout>
+
+                        <TextView
+                            android:id="@+id/tvLabelUrgency"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Urgency Level:"
+                            android:textColor="@color/text_primary"
+                            android:textStyle="bold" />
+
+                        <Spinner
+                            android:id="@+id/spinnerUrgency"
+                            android:layout_width="match_parent"
+                            android:layout_height="50dp"
+                            android:layout_marginBottom="16dp"
+                            android:background="@color/input_background" />
+
+                        <TextView
+                            android:id="@+id/tvLabelDesc"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Detailed Description:"
+                            android:textColor="@color/text_primary"
+                            android:textStyle="bold" />
+
+                        <EditText
+                            android:id="@+id/etDescription"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="24dp"
+                            android:background="@color/input_background"
+                            android:gravity="top|start"
+                            android:hint="Please describe the issue clearly..."
+                            android:textColor="@color/text_primary"
+                            android:textColorHint="@color/text_hint"
+                            android:inputType="textMultiLine"
+                            android:minLines="2"
+                            android:maxLines="6"
+                            android:scrollbars="vertical"
+                            android:padding="16dp" />
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="24dp"
+                            android:orientation="vertical">
+
+                            <Button
+                                android:id="@+id/btnAttachPhoto"
+                                android:layout_width="wrap_content"
+                                android:layout_height="40dp"
+                                android:backgroundTint="#7D7C6C"
+                                android:text="📎 Attach Photo (Optional)"
+                                android:textColor="#FFFFFF"
+                                android:textSize="12sp" />
+
+                            <ImageView
+                                android:id="@+id/ivPhotoPreview"
+                                android:layout_width="match_parent"
+                                android:layout_height="200dp"
+                                android:layout_marginTop="12dp"
+                                android:scaleType="centerCrop"
+                                android:visibility="gone" />
+                        </LinearLayout>
+
+                        <Button
+                            android:id="@+id/btnSubmitReport"
+                            android:layout_width="match_parent"
+                            android:layout_height="55dp"
+                            android:layout_marginBottom="16dp"
+                            android:backgroundTint="@color/unifix_blue"
+                            android:text="Submit Report"
+                            android:textColor="#FFFFFF"
+                            android:textSize="16sp"
+                            android:textStyle="bold" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/containerHistory"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:visibility="gone">
+                    </LinearLayout>
+
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+        </LinearLayout>
+    </ScrollView>
+</RelativeLayout>

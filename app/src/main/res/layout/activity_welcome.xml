@@ -1,0 +1,230 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/rootScrollView"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true"
+    android:background="@drawable/bg_university">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:background="#C0000000"
+        android:padding="20dp">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="24dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"
+                android:text="☑ UniFix"
+                android:textColor="#FFFFFF"
+                android:textSize="22sp"
+                android:textStyle="bold" />
+
+            <Button
+                android:id="@+id/btnToggleLanguage"
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:layout_toLeftOf="@id/btnTopSignIn"
+                android:layout_marginRight="8dp"
+                android:text="🌐 አማርኛ"
+                android:textAllCaps="false"
+                android:textColor="#FFFFFF"
+                android:textSize="14sp"
+                android:backgroundTint="#44FFFFFF"
+                android:textStyle="bold" />
+
+            <Button
+                android:id="@+id/btnTopSignIn"
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:layout_alignParentRight="true"
+                android:text="Sign In"
+                android:textAllCaps="false"
+                android:textColor="#FFFFFF"
+                android:textSize="14sp"
+                android:backgroundTint="#0d6efd"
+                android:textStyle="bold" />
+        </RelativeLayout>
+
+        <TextView
+            android:id="@+id/tvBadge"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingHorizontal="12dp"
+            android:paddingVertical="6dp"
+            android:text="Ethiopia's #1 Campus Issue Reporting Platform"
+            android:textColor="#FFFFFF"
+            android:textSize="12sp"
+            android:textStyle="bold"
+            android:layout_marginBottom="16dp"/>
+
+        <TextView
+            android:id="@+id/tvMainTitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="One Report.\nReal Solutions.\nA Better Campus."
+            android:textColor="#FFFFFF"
+            android:textSize="35sp"
+            android:textStyle="bold"
+            android:lineSpacingMultiplier="1.1"
+            android:layout_marginBottom="12dp"/>
+
+        <TextView
+            android:id="@+id/tvMainDesc"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Report, track and resolve university campus problems in one place."
+            android:textColor="#D1D5DB"
+            android:textSize="18sp"
+            android:lineSpacingMultiplier="1.2"
+            android:layout_marginBottom="24dp"/>
+
+        <Button
+            android:id="@+id/btnReportIssue"
+            android:layout_width="match_parent"
+            android:layout_height="55dp"
+            android:text="Report an Issue"
+            android:textAllCaps="false"
+            android:textColor="#FFFFFF"
+            android:backgroundTint="#0d6efd"
+            android:textStyle="bold"
+            android:textSize="18sp"
+            android:layout_marginBottom="32dp"
+            android:elevation="8dp"/>
+
+        <LinearLayout
+            android:id="@+id/featCard1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:padding="16dp"
+            android:gravity="center_vertical"
+            android:layout_marginBottom="12dp"
+            android:background="#33FFFFFF"
+            android:elevation="8dp">
+
+            <TextView
+                android:id="@+id/featIcon1"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:text="⚡"
+                android:textSize="22sp"
+                android:gravity="center"
+                android:layout_marginRight="16dp"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+                <TextView
+                    android:id="@+id/tvFeat1Title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Fast Response"
+                    android:textColor="#FFFFFF"
+                    android:textSize="18sp"
+                    android:textStyle="bold"/>
+                <TextView
+                    android:id="@+id/tvFeat1Desc"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Tickets resolved quickly"
+                    android:textColor="#F3F4F6"
+                    android:textSize="13sp"/>
+            </LinearLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/featCard2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:padding="16dp"
+            android:gravity="center_vertical"
+            android:layout_marginBottom="12dp"
+            android:background="#33FFFFFF"
+            android:elevation="8dp">
+
+            <TextView
+                android:id="@+id/featIcon2"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:text="🛡️"
+                android:textSize="22sp"
+                android:gravity="center"
+                android:layout_marginRight="16dp"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+                <TextView
+                    android:id="@+id/tvFeat2Title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Transparent"
+                    android:textColor="#FFFFFF"
+                    android:textSize="18sp"
+                    android:textStyle="bold"/>
+                <TextView
+                    android:id="@+id/tvFeat2Desc"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Track every step live"
+                    android:textColor="#F3F4F6"
+                    android:textSize="13sp"/>
+            </LinearLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/featCard3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:padding="16dp"
+            android:gravity="center_vertical"
+            android:layout_marginBottom="24dp"
+            android:background="#33FFFFFF"
+            android:elevation="8dp">
+
+            <TextView
+                android:id="@+id/featIcon3"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:text="👥"
+                android:textSize="22sp"
+                android:gravity="center"
+                android:layout_marginRight="16dp"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+                <TextView
+                    android:id="@+id/tvFeat3Title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="For Everyone"
+                    android:textColor="#FFFFFF"
+                    android:textSize="18sp"
+                    android:textStyle="bold"/>
+                <TextView
+                    android:id="@+id/tvFeat3Desc"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Students &amp; Teachers"
+                    android:textColor="#F3F4F6"
+                    android:textSize="13sp"/>
+            </LinearLayout>
+        </LinearLayout>
+
+    </LinearLayout>
+</ScrollView>

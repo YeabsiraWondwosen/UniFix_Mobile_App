@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "82453885904",
+    "project_id": "unifix-c44a2",
+    "storage_bucket": "unifix-c44a2.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:82453885904:android:0d95aed24b68d257923fd5",
+        "android_client_info": {
+          "package_name": "com.UniFix.unifix"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCB2Qjuzb3a1ZaHn3jseGxeWPewnk-DPoo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
