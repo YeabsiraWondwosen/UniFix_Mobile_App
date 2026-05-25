@@ -36,20 +36,20 @@ UniFix is built to support the entire university ecosystem. Every user has a tai
 <div align="center">
   <table>
     <tr>
+      <td align="center"><b>🔐 Login & Auth</b></td>
       <td align="center"><b>🎓 Student Dashboard</b></td>
-      <td align="center"><b>🔧 Solver Dashboard</b></td>
     </tr>
     <tr>
+      <td align="center">
+        <img src="screenshots/login.png" width="250" alt="Login Screen"/>
+      </td>
       <td align="center">
         <img src="screenshots/student_dash.png" width="250" alt="Student Dashboard"/>
       </td>
-      <td align="center">
-        <img src="screenshots/solver_dash.png" width="250" alt="Solver Dashboard"/>
-      </td>
     </tr>
     <tr>
-      <td align="center"><i>Submit issues, upload evidence, and track real-time progress.</i></td>
-      <td align="center"><i>Manage active tasks, delegate work, and track dynamic deadlines.</i></td>
+      <td align="center"><i>Secure access with ML-based ID card verification.</i></td>
+      <td align="center"><i>Submit issues, upload evidence, and track progress.</i></td>
     </tr>
   </table>
 
@@ -57,15 +57,20 @@ UniFix is built to support the entire university ecosystem. Every user has a tai
 
   <table>
     <tr>
+      <td align="center"><b>🔧 Solver Dashboard</b></td>
       <td align="center"><b>👑 Admin Dashboard</b></td>
     </tr>
     <tr>
+      <td align="center">
+        <img src="screenshots/solver_dash.png" width="250" alt="Solver Dashboard"/>
+      </td>
       <td align="center">
         <img src="screenshots/admin_dash.png" width="250" alt="Admin Dashboard"/>
       </td>
     </tr>
     <tr>
-      <td align="center"><i>Campus analytics, user management, PDF/CSV exports, and manual reviews.</i></td>
+      <td align="center"><i>Manage active tasks and dynamic deadlines.</i></td>
+      <td align="center"><i>Campus analytics, user management, and exports.</i></td>
     </tr>
   </table>
 </div>
@@ -108,6 +113,7 @@ UniFix/
 │   ├── src/
 │   │   ├── main/
 │   │   │   ├── java/com/UniFix/unifix/
+│   │   │   │   ├── LoginActivity.java
 │   │   │   │   ├── AdminDashboardActivity.java
 │   │   │   │   ├── SolverDashboardActivity.java
 │   │   │   │   ├── StudentDashboardActivity.java
@@ -117,6 +123,7 @@ UniFix/
 │   │   │   │   └── drawable/        # App assets, icons, backgrounds
 │   │   │   └── AndroidManifest.xml
 ├── screenshots/                     # Project visual documentation
+│   ├── login.png
 │   ├── admin_dash.png
 │   ├── solver_dash.png
 │   └── student_dash.png
