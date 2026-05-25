@@ -20,25 +20,63 @@
 
 ---
 
+## 👥 Who Will Use UniFix?
+
+UniFix is built to support the entire university ecosystem. Every user has a tailored experience designed for their specific daily needs:
+
+* **🎓 Students:** Can instantly report issues in their dormitories, cafeterias, or general campus facilities. They can upload photo evidence and track the exact status of their tickets in real time.
+* **📚 Teachers:** Utilize a specialized reporting flow designed for academic needs, such as reporting broken classroom equipment (like projectors), requesting teaching materials, or filing office maintenance requests.
+* **🔧 Solvers (Campus Technicians & Staff):** Receive automated, department-specific task assignments (e.g., ICT, Health, Maintenance). They can update task statuses to "In Progress" or "Finished," delegate tasks to other staff, or appeal assignments directly to the Administration.
+* **👑 Administrators:** The command center of the campus. Admins oversee all operations, manage user accounts (warn/ban/restore), review staff appeals, and utilize real-time analytics to monitor resolution times and department performance.
+
+---
+
 ## 📱 Application Dashboards
 
-UniFix features tailored interfaces for four distinct user roles.
+<div align="center">
+  <table>
+    <tr>
+      <td align="center"><b>🎓 Student Dashboard</b></td>
+      <td align="center"><b>🔧 Solver Dashboard</b></td>
+    </tr>
+    <tr>
+      <td align="center">
+        <img src="screenshots/student_dash.png" width="250" alt="Student Dashboard"/>
+      </td>
+      <td align="center">
+        <img src="screenshots/solver_dash.png" width="250" alt="Solver Dashboard"/>
+      </td>
+    </tr>
+    <tr>
+      <td align="center"><i>Submit issues, upload evidence, and track real-time progress.</i></td>
+      <td align="center"><i>Manage active tasks, delegate work, and track dynamic deadlines.</i></td>
+    </tr>
+  </table>
 
-| 🎓 Student Dashboard | 📚 Teacher Dashboard |
-|:---:|:---:|
-| ![Student](screenshots/student_dash.png) | ![Teacher](screenshots/teacher_dash.png) |
-| *Submit issues, upload photo evidence, and track real-time ticket progress.* | *Specialized reporting for academic resources, classrooms, and office tech.* |
+  <br>
 
-| 🔧 Solver (Staff) Dashboard | 👑 Admin Dashboard |
-|:---:|:---:|
-| ![Solver](screenshots/solver_dash.png) | ![Admin](screenshots/admin_dash.png) |
-| *Accept, decline, delegate tasks, and manage dynamic deadlines.* | *Campus analytics, user management, PDF/CSV exports, and manual reviews.* |
+  <table>
+    <tr>
+      <td align="center"><b>👑 Admin Dashboard</b></td>
+    </tr>
+    <tr>
+      <td align="center">
+        <img src="screenshots/admin_dash.png" width="250" alt="Admin Dashboard"/>
+      </td>
+    </tr>
+    <tr>
+      <td align="center"><i>Campus analytics, user management, PDF/CSV exports, and manual reviews.</i></td>
+    </tr>
+  </table>
+</div>
+
+*(Note: Teacher Dashboard layout is included in the app but not pictured above).*
 
 ---
 
 ## ✨ Core Features
 
-* **🔐 Role-Based Access Control:** Secure, customized environments for Students, Teachers, Solvers, and Admins.
+* **🔐 Role-Based Access Control:** Secure, customized environments tailored to the four core user types.
 * **🆔 Smart ID Verification:** Utilizes **Google ML Kit** (OCR & Barcode scanning) to automatically verify physical Student and Teacher ID cards during registration.
 * **🌍 Bilingual Support:** Real-time UI translation toggling between **English** and **Amharic (አማርኛ)**.
 * **🌗 Adaptive UI:** Premium interface with dynamic Light and Dark mode toggling that respects system settings.
@@ -81,7 +119,6 @@ UniFix/
 ├── screenshots/                     # Project visual documentation
 │   ├── admin_dash.png
 │   ├── solver_dash.png
-│   ├── student_dash.png
-│   └── teacher_dash.png
+│   └── student_dash.png
 ├── build.gradle
 └── README.md
