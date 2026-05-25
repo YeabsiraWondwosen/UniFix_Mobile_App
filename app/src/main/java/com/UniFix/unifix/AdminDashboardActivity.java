@@ -266,7 +266,6 @@ public class AdminDashboardActivity extends AppCompatActivity {
         styleInputBox(spinNewStaffRole);
         makeInteractive(btnCreateStaff);
 
-        // Toggle logic for adding new staff
         btnToggleAddStaff.setOnClickListener(v -> {
             if (sectionHeadAdmin.getVisibility() == View.GONE) {
                 sectionHeadAdmin.setVisibility(View.VISIBLE);
@@ -279,7 +278,6 @@ public class AdminDashboardActivity extends AppCompatActivity {
             }
         });
 
-        // 🔥 CONNECTED TO NEW SLIDING LOGIC
         btnTabReports.setOnClickListener(v -> switchToTab("reports", true));
         btnTabUsers.setOnClickListener(v -> switchToTab("users", true));
         btnTabMessages.setOnClickListener(v -> switchToTab("messages", true));
@@ -326,7 +324,6 @@ public class AdminDashboardActivity extends AppCompatActivity {
         btnSearchHistory.setOnClickListener(v -> {
             String searchQuery = etSearchUsername.getText().toString().trim().toLowerCase();
             String searchCat = spinSearchCategory.getSelectedItem().toString();
-            // Translate the Amharic UI choice back to English for Firebase!
             String dbSearchCat = getEnglishCategory(searchCat);
 
             if (searchQuery.isEmpty() && dbSearchCat.equals("All Categories")) {
@@ -351,7 +348,7 @@ public class AdminDashboardActivity extends AppCompatActivity {
     }
 
     // ==========================================
-    // GLOBAL SYSTEM ALERTS (BELL ICON)
+    // GLOBAL SYSTEM ALERTS (BELL ICON) - FIXED
     // ==========================================
     private void setupGlobalAlertBell() {
         Button btnBell = findViewById(R.id.btnBell);
@@ -362,7 +359,6 @@ public class AdminDashboardActivity extends AppCompatActivity {
             makeInteractive(btnBell);
             btnBell.setOnClickListener(v -> showSystemAlertsDialog());
 
-            // Listen for system alerts
             db.collection("admin_messages")
                     .whereEqualTo("recipient", loggedInUserName)
                     .whereEqualTo("sender", "System Alerts")
@@ -406,7 +402,7 @@ public class AdminDashboardActivity extends AppCompatActivity {
                 GradientDrawable alertBg = new GradientDrawable();
                 alertBg.setCornerRadius(20f);
                 alertBg.setColor(ContextCompat.getColor(this, R.color.input_background));
-                alertBg.setStroke(3, Color.parseColor("#dc3545")); // Highlight Red Border
+                alertBg.setStroke(3, Color.parseColor("#dc3545"));
                 tvAlert.setBackground(alertBg);
 
                 LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(-1, -2);
@@ -415,7 +411,6 @@ public class AdminDashboardActivity extends AppCompatActivity {
 
                 layout.addView(tvAlert);
 
-                // Mark as read immediately when viewed
                 db.collection("admin_messages").document(doc.getId()).update("status", "Read");
             }
         }
@@ -474,6 +469,8 @@ public class AdminDashboardActivity extends AppCompatActivity {
         TextView tvNavTitle = findViewById(R.id.navTitle);
         if (tvNavTitle != null) tvNavTitle.setText("UniFix አስተዳዳሪ");
 
+        btnSettings.setText("⚙️");
+
         btnTabReports.setText("አጠቃላይ እይታ");
         btnTabUsers.setText("ተጠቃሚዎች");
         btnTabMessages.setText("መልዕክቶች");
@@ -491,7 +488,6 @@ public class AdminDashboardActivity extends AppCompatActivity {
         TextView tvActiveReportsTitle = findViewById(R.id.tvActiveReportsTitle);
         if (tvActiveReportsTitle != null) tvActiveReportsTitle.setText("የነቁ ሪፖርቶች አጠቃላይ እይታ");
 
-        // Cards
         TextView t1 = findViewById(R.id.tvCardIct); if (t1 != null) t1.setText("አይሲቲ (ICT)");
         TextView t2 = findViewById(R.id.tvCardDorm); if (t2 != null) t2.setText("መኝታ ክፍል");
         TextView t3 = findViewById(R.id.tvCardAcad); if (t3 != null) t3.setText("አካዳሚክ");
@@ -673,7 +669,6 @@ public class AdminDashboardActivity extends AppCompatActivity {
         }).show();
     }
 
-    // 🔥 UPGRADED: MISSING METHOD ADDED 🔥
     private void showWelcomePopup(int totalTasks) {
         String title = isAmharic ? "🔔 እርምጃ ያስፈልጋል" : "🔔 Action Required";
         String msg = isAmharic ? "እንኳን ደህና መጡ, @" + loggedInUserName + "!\n\nከመመደባቸው በፊት የእርስዎን ግምገማ የሚፈልጉ " + totalTasks + " የሚጠብቁ ወይም ይግባኝ የተባሉ ሪፖርቶች አሉ።" : "Welcome back, @" + loggedInUserName + "!\n\nYou have " + totalTasks + " pending or appealed reports that REQUIRE YOUR REVIEW before assignment.";
@@ -1138,7 +1133,10 @@ public class AdminDashboardActivity extends AppCompatActivity {
         tvTitle.setTypeface(null, isBanned != null && isBanned ? android.graphics.Typeface.BOLD : android.graphics.Typeface.NORMAL);
         card.addView(tvTitle);
 
-        if (isBanned != null && isBanned) {
+        boolean isHeadAdmin = "dbu_admin1".equals(loggedInUserName) || "dbu_admin2".equals(loggedInUserName);
+        boolean isTargetHeadAdmin = "dbu_admin1".equals(doc.getId()) || "dbu_admin2".equals(doc.getId());
+
+        if (isBanned != null && isBanned && isHeadAdmin) {
             String reason = doc.getString("lastWarningReason");
             TextView tvBanReason = new TextView(this);
             tvBanReason.setText((isAmharic ? "የታገደበት ምክንያት: " : "Ban Reason: ") + (reason != null ? reason : "Unknown"));
@@ -1159,7 +1157,7 @@ public class AdminDashboardActivity extends AppCompatActivity {
             makeInteractive(btnRestore);
             btnRestore.setOnClickListener(v -> {
                 db.collection("users").document(doc.getId())
-                        .update("isBanned", false, "warnings", 0, "lastWarningReason", isAmharic ? "በአስተዳዳሪ ተመልሷል" : "Restored by Admin.")
+                        .update("isBanned", false, "warnings", 0, "lastWarningReason", isAmharic ? "በዋና አስተዳዳሪ ተመልሷል" : "Restored by Head Admin.")
                         .addOnSuccessListener(a -> fetchAllUsersOnce());
             });
 
@@ -1176,11 +1174,18 @@ public class AdminDashboardActivity extends AppCompatActivity {
             reviewLayout.addView(btnDelete);
             card.addView(reviewLayout);
 
-        } else if ("Admin".equals(role)) {
+        } else if ("Admin".equals(role) && !isHeadAdmin) {
             TextView tvProtected = new TextView(this);
             tvProtected.setText(isAmharic ? "🛡️ የተጠበቀ የስርዓት አስተዳዳሪ" : "🛡️ Protected System Admin");
             tvProtected.setTextColor(Color.parseColor("#198754"));
             tvProtected.setTypeface(null, android.graphics.Typeface.ITALIC);
+            tvProtected.setPadding(0, 10, 0, 0);
+            card.addView(tvProtected);
+        } else if ("Admin".equals(role) && isTargetHeadAdmin) {
+            TextView tvProtected = new TextView(this);
+            tvProtected.setText(isAmharic ? "👑 ዋና አስተዳዳሪ" : "👑 Head Admin");
+            tvProtected.setTextColor(Color.parseColor("#0d6efd"));
+            tvProtected.setTypeface(null, android.graphics.Typeface.BOLD_ITALIC);
             tvProtected.setPadding(0, 10, 0, 0);
             card.addView(tvProtected);
         } else {
@@ -2697,14 +2702,8 @@ public class AdminDashboardActivity extends AppCompatActivity {
 
                             GradientDrawable gd = new GradientDrawable();
                             gd.setCornerRadius(40f);
-                            if (isMe) {
-                                gd.setColor(Color.parseColor("#6f42c1"));
-                                bubble.setTextColor(Color.WHITE);
-                            } else {
-                                gd.setColor(ContextCompat.getColor(this, R.color.input_background));
-                                bubble.setTextColor(ContextCompat.getColor(this, R.color.text_primary));
-                                bubble.setElevation(2f);
-                            }
+                            if (isMe) { gd.setColor(Color.parseColor("#6f42c1")); bubble.setTextColor(Color.WHITE); }
+                            else { gd.setColor(ContextCompat.getColor(this, R.color.input_background)); bubble.setTextColor(ContextCompat.getColor(this, R.color.text_primary)); bubble.setElevation(2f); }
                             bubble.setBackground(gd);
 
                             LinearLayout.LayoutParams bp = new LinearLayout.LayoutParams(
@@ -2763,5 +2762,3 @@ public class AdminDashboardActivity extends AppCompatActivity {
         });
     }
 }
-
-
