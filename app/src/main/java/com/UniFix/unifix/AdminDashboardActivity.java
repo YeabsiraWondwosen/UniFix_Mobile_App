@@ -193,7 +193,7 @@ public class AdminDashboardActivity extends AppCompatActivity {
         makeInteractive(btnTabAnalytics);
         makeInteractive(btnSettings);
 
-
+        // 🔥 DYNAMIC SYSTEM ALERT BELL 🔥
         setupGlobalAlertBell();
 
         containerReports = findViewById(R.id.containerReports);
@@ -266,12 +266,7 @@ public class AdminDashboardActivity extends AppCompatActivity {
         styleInputBox(spinNewStaffRole);
         makeInteractive(btnCreateStaff);
 
-        if ("dbu_admin1".equals(loggedInUserName) || "dbu_admin2".equals(loggedInUserName)) {
-            tabLayoutContainer.setWeightSum(4f);
-            btnTabAnalytics.setVisibility(View.VISIBLE);
-            btnToggleAddStaff.setVisibility(View.VISIBLE);
-        }
-
+        // Toggle logic for adding new staff
         btnToggleAddStaff.setOnClickListener(v -> {
             if (sectionHeadAdmin.getVisibility() == View.GONE) {
                 sectionHeadAdmin.setVisibility(View.VISIBLE);
@@ -284,7 +279,7 @@ public class AdminDashboardActivity extends AppCompatActivity {
             }
         });
 
-
+        // 🔥 CONNECTED TO NEW SLIDING LOGIC
         btnTabReports.setOnClickListener(v -> switchToTab("reports", true));
         btnTabUsers.setOnClickListener(v -> switchToTab("users", true));
         btnTabMessages.setOnClickListener(v -> switchToTab("messages", true));
@@ -294,6 +289,7 @@ public class AdminDashboardActivity extends AppCompatActivity {
         btnDownloadCSV.setOnClickListener(v -> generateCSV());
         btnDownloadPDF.setOnClickListener(v -> generatePDF());
 
+        // LINK CARD CLICKS TO PROPER CATEGORY NAMES
         if(findViewById(R.id.cardTechnology) != null) findViewById(R.id.cardTechnology).setOnClickListener(v -> openCategoryReports("Staff ICT Manager"));
         if(findViewById(R.id.cardDormitory) != null) findViewById(R.id.cardDormitory).setOnClickListener(v -> openCategoryReports("Staff Dormitory Manager"));
         if(findViewById(R.id.cardAcademic) != null) findViewById(R.id.cardAcademic).setOnClickListener(v -> openCategoryReports("Staff Academic Resources Manager"));
@@ -358,49 +354,12 @@ public class AdminDashboardActivity extends AppCompatActivity {
     // GLOBAL SYSTEM ALERTS (BELL ICON)
     // ==========================================
     private void setupGlobalAlertBell() {
-        LinearLayout topNavBar = findViewById(R.id.topNavBar);
-        if (topNavBar != null) {
-            RelativeLayout alertLayout = new RelativeLayout(this);
-            LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
-                    LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
-            params.setMarginEnd(16);
-            alertLayout.setLayoutParams(params);
+        Button btnBell = findViewById(R.id.btnBell);
+        tvGlobalAlertBadge = findViewById(R.id.tvGlobalAlertBadge);
+        View badgeContainer = findViewById(R.id.badgeContainer);
 
-            Button btnBell = new Button(this);
-            btnBell.setText("🛎️");
-            btnBell.setTextSize(18f);
-            btnBell.setPadding(0,0,0,0);
-
-            GradientDrawable bellShape = new GradientDrawable();
-            bellShape.setCornerRadius(20f);
-            bellShape.setColor(ContextCompat.getColor(this, R.color.input_background));
-            btnBell.setBackground(bellShape);
-            btnBell.setLayoutParams(new RelativeLayout.LayoutParams(110, 110));
+        if (btnBell != null && tvGlobalAlertBadge != null && badgeContainer != null) {
             makeInteractive(btnBell);
-
-            tvGlobalAlertBadge = new TextView(this);
-            tvGlobalAlertBadge.setText("0");
-            tvGlobalAlertBadge.setTextColor(Color.WHITE);
-            tvGlobalAlertBadge.setTextSize(10f);
-            tvGlobalAlertBadge.setGravity(Gravity.CENTER);
-            tvGlobalAlertBadge.setTypeface(null, Typeface.BOLD);
-            GradientDrawable badgeShape = new GradientDrawable();
-            badgeShape.setShape(GradientDrawable.OVAL);
-            badgeShape.setColor(Color.parseColor("#dc3545"));
-            tvGlobalAlertBadge.setBackground(badgeShape);
-            tvGlobalAlertBadge.setVisibility(View.GONE);
-
-            RelativeLayout.LayoutParams badgeParams = new RelativeLayout.LayoutParams(45, 45);
-            badgeParams.addRule(RelativeLayout.ALIGN_PARENT_END);
-            badgeParams.addRule(RelativeLayout.ALIGN_PARENT_TOP);
-            tvGlobalAlertBadge.setLayoutParams(badgeParams);
-
-            alertLayout.addView(btnBell);
-            alertLayout.addView(tvGlobalAlertBadge);
-
-            // Add the bell to the right side of the navbar, before the toggle buttons
-            topNavBar.addView(alertLayout, 1);
-
             btnBell.setOnClickListener(v -> showSystemAlertsDialog());
 
             // Listen for system alerts
@@ -413,9 +372,9 @@ public class AdminDashboardActivity extends AppCompatActivity {
                         activeSystemAlerts = value.getDocuments();
                         if (!activeSystemAlerts.isEmpty()) {
                             tvGlobalAlertBadge.setText(String.valueOf(activeSystemAlerts.size()));
-                            tvGlobalAlertBadge.setVisibility(View.VISIBLE);
+                            badgeContainer.setVisibility(View.VISIBLE);
                         } else {
-                            tvGlobalAlertBadge.setVisibility(View.GONE);
+                            badgeContainer.setVisibility(View.GONE);
                         }
                     });
         }
@@ -446,7 +405,8 @@ public class AdminDashboardActivity extends AppCompatActivity {
 
                 GradientDrawable alertBg = new GradientDrawable();
                 alertBg.setCornerRadius(20f);
-                alertBg.setColor(Color.parseColor("#FFE8E8"));
+                alertBg.setColor(ContextCompat.getColor(this, R.color.input_background));
+                alertBg.setStroke(3, Color.parseColor("#dc3545")); // Highlight Red Border
                 tvAlert.setBackground(alertBg);
 
                 LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(-1, -2);
@@ -514,8 +474,6 @@ public class AdminDashboardActivity extends AppCompatActivity {
         TextView tvNavTitle = findViewById(R.id.navTitle);
         if (tvNavTitle != null) tvNavTitle.setText("UniFix አስተዳዳሪ");
 
-        btnSettings.setText("⚙️ ቅንብሮች");
-
         btnTabReports.setText("አጠቃላይ እይታ");
         btnTabUsers.setText("ተጠቃሚዎች");
         btnTabMessages.setText("መልዕክቶች");
@@ -533,6 +491,7 @@ public class AdminDashboardActivity extends AppCompatActivity {
         TextView tvActiveReportsTitle = findViewById(R.id.tvActiveReportsTitle);
         if (tvActiveReportsTitle != null) tvActiveReportsTitle.setText("የነቁ ሪፖርቶች አጠቃላይ እይታ");
 
+        // Cards
         TextView t1 = findViewById(R.id.tvCardIct); if (t1 != null) t1.setText("አይሲቲ (ICT)");
         TextView t2 = findViewById(R.id.tvCardDorm); if (t2 != null) t2.setText("መኝታ ክፍል");
         TextView t3 = findViewById(R.id.tvCardAcad); if (t3 != null) t3.setText("አካዳሚክ");
@@ -944,7 +903,7 @@ public class AdminDashboardActivity extends AppCompatActivity {
                 fos.close();
                 Toast.makeText(this, isAmharic ? "CSV ፋይል ተቀምጧል: " + file.getAbsolutePath() : "CSV Saved to App Files: " + file.getAbsolutePath(), Toast.LENGTH_LONG).show();
             } catch (Exception e) {
-                Toast.makeText(this, isAmharic ? "CSV በማመንጨት ላይ ስህተት" : "Error generating CSV", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, isAmharic ? "CSV ፋይል በማመንጨት ላይ ስህተት ተፈጥሯል" : "Error generating CSV", Toast.LENGTH_SHORT).show();
             }
         });
     }
@@ -980,7 +939,7 @@ public class AdminDashboardActivity extends AppCompatActivity {
                 document.writeTo(new FileOutputStream(file));
                 Toast.makeText(this, isAmharic ? "PDF ፋይል ተቀምጧል: " + file.getAbsolutePath() : "PDF Saved to App Files: " + file.getAbsolutePath(), Toast.LENGTH_LONG).show();
             } catch (IOException e) {
-                Toast.makeText(this, isAmharic ? "PDF በማመንጨት ላይ ስህተት" : "Error generating PDF", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, isAmharic ? "PDF በማመንጨት ላይ ስህተት ተፈጥሯል" : "Error generating PDF", Toast.LENGTH_SHORT).show();
             }
             document.close();
         });
@@ -1179,10 +1138,7 @@ public class AdminDashboardActivity extends AppCompatActivity {
         tvTitle.setTypeface(null, isBanned != null && isBanned ? android.graphics.Typeface.BOLD : android.graphics.Typeface.NORMAL);
         card.addView(tvTitle);
 
-        boolean isHeadAdmin = "dbu_admin1".equals(loggedInUserName) || "dbu_admin2".equals(loggedInUserName);
-        boolean isTargetHeadAdmin = "dbu_admin1".equals(doc.getId()) || "dbu_admin2".equals(doc.getId());
-
-        if (isBanned != null && isBanned && isHeadAdmin) {
+        if (isBanned != null && isBanned) {
             String reason = doc.getString("lastWarningReason");
             TextView tvBanReason = new TextView(this);
             tvBanReason.setText((isAmharic ? "የታገደበት ምክንያት: " : "Ban Reason: ") + (reason != null ? reason : "Unknown"));
@@ -1203,7 +1159,7 @@ public class AdminDashboardActivity extends AppCompatActivity {
             makeInteractive(btnRestore);
             btnRestore.setOnClickListener(v -> {
                 db.collection("users").document(doc.getId())
-                        .update("isBanned", false, "warnings", 0, "lastWarningReason", isAmharic ? "በዋና አስተዳዳሪ ተመልሷል" : "Restored by Head Admin.")
+                        .update("isBanned", false, "warnings", 0, "lastWarningReason", isAmharic ? "በአስተዳዳሪ ተመልሷል" : "Restored by Admin.")
                         .addOnSuccessListener(a -> fetchAllUsersOnce());
             });
 
@@ -1220,18 +1176,11 @@ public class AdminDashboardActivity extends AppCompatActivity {
             reviewLayout.addView(btnDelete);
             card.addView(reviewLayout);
 
-        } else if ("Admin".equals(role) && !isHeadAdmin) {
+        } else if ("Admin".equals(role)) {
             TextView tvProtected = new TextView(this);
             tvProtected.setText(isAmharic ? "🛡️ የተጠበቀ የስርዓት አስተዳዳሪ" : "🛡️ Protected System Admin");
             tvProtected.setTextColor(Color.parseColor("#198754"));
             tvProtected.setTypeface(null, android.graphics.Typeface.ITALIC);
-            tvProtected.setPadding(0, 10, 0, 0);
-            card.addView(tvProtected);
-        } else if ("Admin".equals(role) && isTargetHeadAdmin) {
-            TextView tvProtected = new TextView(this);
-            tvProtected.setText(isAmharic ? "👑 ዋና አስተዳዳሪ" : "👑 Head Admin");
-            tvProtected.setTextColor(Color.parseColor("#0d6efd"));
-            tvProtected.setTypeface(null, android.graphics.Typeface.BOLD_ITALIC);
             tvProtected.setPadding(0, 10, 0, 0);
             card.addView(tvProtected);
         } else {
@@ -2456,8 +2405,13 @@ public class AdminDashboardActivity extends AppCompatActivity {
                             String uName = doc.getString("username");
                             if (uName != null && !uName.equals(loggedInUserName)) {
                                 String r = doc.getString("role");
-                                String fName = doc.getString("fullName") != null ? doc.getString("fullName") : r;
-                                targetNames.add(fName + " (@" + uName + ") - " + r);
+                                String displayR = r;
+                                if(isAmharic) {
+                                    if(r.equals("Admin")) displayR = "አስተዳዳሪ";
+                                    else if(r.equals("Solver")) displayR = "ባለሙያ";
+                                }
+                                String fName = doc.getString("fullName") != null ? doc.getString("fullName") : displayR;
+                                targetNames.add(fName + " (@" + uName + ") - " + displayR);
                                 targetUsernames.add(uName);
                             }
                         }
@@ -2676,7 +2630,7 @@ public class AdminDashboardActivity extends AppCompatActivity {
         replyContainer.setGravity(Gravity.CENTER_VERTICAL);
 
         EditText etReply = new EditText(this);
-        etReply.setHint(isAmharic ? "ለግሩፑ መልዕክት ይጻፉ..." : "Message Group...");
+        etReply.setHint(isAmharic ? "ለአስተዳዳሪ/ባለሙያ መልዕክት ይጻፉ..." : "Message Admin/Solver...");
         styleInputBox(etReply);
         etReply.setPadding(40, 30, 40, 30);
         etReply.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_FLAG_MULTI_LINE);
@@ -2743,8 +2697,14 @@ public class AdminDashboardActivity extends AppCompatActivity {
 
                             GradientDrawable gd = new GradientDrawable();
                             gd.setCornerRadius(40f);
-                            if (isMe) { gd.setColor(Color.parseColor("#6f42c1")); bubble.setTextColor(Color.WHITE); }
-                            else { gd.setColor(Color.parseColor("#FFFFFF")); bubble.setTextColor(Color.BLACK); bubble.setElevation(2f); }
+                            if (isMe) {
+                                gd.setColor(Color.parseColor("#6f42c1"));
+                                bubble.setTextColor(Color.WHITE);
+                            } else {
+                                gd.setColor(ContextCompat.getColor(this, R.color.input_background));
+                                bubble.setTextColor(ContextCompat.getColor(this, R.color.text_primary));
+                                bubble.setElevation(2f);
+                            }
                             bubble.setBackground(gd);
 
                             LinearLayout.LayoutParams bp = new LinearLayout.LayoutParams(
@@ -2788,16 +2748,20 @@ public class AdminDashboardActivity extends AppCompatActivity {
         inAppMsg.put("timestamp", System.currentTimeMillis());
         inAppMsg.put("status", "Unread");
 
-        db.collection("users").document(targetUsername).get().addOnSuccessListener(doc -> {
-            if (doc.exists()) {
-                String role = doc.getString("role");
+        db.collection("users").document(targetUsername).get().addOnSuccessListener(targetDoc -> {
+            if (targetDoc.exists()) {
+                String role = targetDoc.getString("role");
 
                 if ("Admin".equals(role)) {
                     db.collection("admin_messages").add(inAppMsg);
                 } else if ("Solver".equals(role)) {
                     db.collection("solver_inbox").add(inAppMsg);
+                } else {
+                    db.collection("user_messages").add(inAppMsg);
                 }
             }
         });
     }
 }
+
+

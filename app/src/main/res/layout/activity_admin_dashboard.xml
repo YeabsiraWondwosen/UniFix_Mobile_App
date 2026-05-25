@@ -423,7 +423,7 @@
                             android:text="➕ Add New Staff Member"
                             android:textColor="#FFFFFF"
                             android:textStyle="bold"
-                            android:visibility="gone" />
+                            android:visibility="visible" />
 
                         <LinearLayout
                             android:id="@+id/sectionHeadAdmin"
@@ -594,7 +594,7 @@
                                 android:layout_weight="1"
                                 android:layout_height="75dp"
                                 android:layout_marginEnd="4dp"
-                                app:cardBackgroundColor="@color/input_background"
+                                app:cardBackgroundColor="#111111"
                                 app:cardCornerRadius="10dp"
                                 app:cardElevation="2dp">
                                 <LinearLayout android:layout_width="match_parent" android:layout_height="match_parent" android:orientation="vertical" android:padding="8dp">
@@ -608,7 +608,7 @@
                                 android:layout_weight="1"
                                 android:layout_height="75dp"
                                 android:layout_marginHorizontal="2dp"
-                                app:cardBackgroundColor="@color/input_background"
+                                app:cardBackgroundColor="#111111"
                                 app:cardCornerRadius="10dp"
                                 app:cardElevation="2dp">
                                 <LinearLayout android:layout_width="match_parent" android:layout_height="match_parent" android:orientation="vertical" android:padding="8dp">
@@ -622,7 +622,7 @@
                                 android:layout_weight="1"
                                 android:layout_height="75dp"
                                 android:layout_marginHorizontal="2dp"
-                                app:cardBackgroundColor="@color/input_background"
+                                app:cardBackgroundColor="#111111"
                                 app:cardCornerRadius="10dp"
                                 app:cardElevation="2dp">
                                 <LinearLayout android:layout_width="match_parent" android:layout_height="match_parent" android:orientation="vertical" android:padding="8dp">
@@ -636,7 +636,7 @@
                                 android:layout_weight="1"
                                 android:layout_height="75dp"
                                 android:layout_marginStart="4dp"
-                                app:cardBackgroundColor="@color/input_background"
+                                app:cardBackgroundColor="#111111"
                                 app:cardCornerRadius="10dp"
                                 app:cardElevation="2dp">
                                 <LinearLayout android:layout_width="match_parent" android:layout_height="match_parent" android:orientation="vertical" android:padding="8dp">
@@ -656,7 +656,7 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="250dp"
                                 android:layout_marginBottom="12dp"
-                                app:cardBackgroundColor="@color/input_background"
+                                app:cardBackgroundColor="#111111"
                                 app:cardCornerRadius="15dp"
                                 app:cardElevation="2dp">
                                 <LinearLayout android:layout_width="match_parent" android:layout_height="match_parent" android:orientation="vertical" android:padding="12dp">
@@ -672,7 +672,7 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="250dp"
                                 android:layout_marginBottom="12dp"
-                                app:cardBackgroundColor="@color/input_background"
+                                app:cardBackgroundColor="#111111"
                                 app:cardCornerRadius="15dp"
                                 app:cardElevation="2dp">
                                 <LinearLayout android:layout_width="match_parent" android:layout_height="match_parent" android:orientation="vertical" android:padding="12dp">
@@ -689,7 +689,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="250dp"
                             android:layout_marginBottom="16dp"
-                            app:cardBackgroundColor="@color/input_background"
+                            app:cardBackgroundColor="#111111"
                             app:cardCornerRadius="15dp"
                             app:cardElevation="2dp">
                             <LinearLayout android:layout_width="match_parent" android:layout_height="match_parent" android:orientation="vertical" android:padding="12dp">
