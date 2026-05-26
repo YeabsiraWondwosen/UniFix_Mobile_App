@@ -635,7 +635,6 @@ public class AdminDashboardActivity extends AppCompatActivity {
         }
     }
 
-    // 🔥 NEW SETTINGS MENU LOGIC 🔥
     private void showSettingsMenu() {
         int currentNightMode = getResources().getConfiguration().uiMode & Configuration.UI_MODE_NIGHT_MASK;
         boolean isNight = currentNightMode == Configuration.UI_MODE_NIGHT_YES;
@@ -1087,7 +1086,7 @@ public class AdminDashboardActivity extends AppCompatActivity {
         }
     }
 
-    // 🔥 UPGRADED: MANAGE USER BUTTON & DIALOG 🔥
+
     private void addUserCardToUI(DocumentSnapshot doc) {
         LinearLayout card = new LinearLayout(this);
         card.setOrientation(LinearLayout.VERTICAL);
@@ -1269,7 +1268,7 @@ public class AdminDashboardActivity extends AppCompatActivity {
         });
         layout.addView(btnSave);
 
-        // Retract Warning
+
         if (currentWarnings > 0) {
             Button btnRetract = new Button(this);
             btnRetract.setText(isAmharic ? "➖ ማስጠንቀቂያ አንሳ (-1)" : "➖ Retract Warning (-1)");

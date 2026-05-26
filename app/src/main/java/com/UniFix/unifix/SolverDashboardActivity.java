@@ -87,7 +87,7 @@ public class SolverDashboardActivity extends AppCompatActivity {
     String msgRemoveHistory = "Remove from History";
     String msgOpenChat = "💬 Open Ticket Group Chat";
 
-    // --- 🎨 UI HELPER METHODS ---
+
     private void styleFloatingCard(View v) {
         if (v != null) {
             GradientDrawable shape = new GradientDrawable();
@@ -206,6 +206,9 @@ public class SolverDashboardActivity extends AppCompatActivity {
         switchToTab("active", false);
     }
 
+    // ==========================================
+    // GLOBAL SYSTEM ALERTS (BELL ICON) - FIXED
+    // ==========================================
     private void setupGlobalAlertBell() {
         Button btnBell = findViewById(R.id.btnBell);
         tvGlobalAlertBadge = findViewById(R.id.tvGlobalAlertBadge);
@@ -277,7 +280,7 @@ public class SolverDashboardActivity extends AppCompatActivity {
         builder.show();
     }
 
-
+    // --- TRANSLATION MAPPER & SHORT HAND NAMES ---
     private String getShortDeptName(String fullDept) {
         if (fullDept == null) return "Other";
         if (fullDept.contains("ICT")) return isAmharic ? "አይሲቲ (ICT)" : "ICT";
@@ -645,8 +648,7 @@ public class SolverDashboardActivity extends AppCompatActivity {
             @Override public void onNothingSelected(AdapterView<?> parent) {}
         });
     }
-
-    private void fetchSolverProfile() {
+private void fetchSolverProfile() {
         db.collection("users").whereEqualTo("username", mySolverUsername).get()
                 .addOnSuccessListener(queryDocumentSnapshots -> {
                     for (QueryDocumentSnapshot doc : queryDocumentSnapshots) {
@@ -778,6 +780,9 @@ public class SolverDashboardActivity extends AppCompatActivity {
         if(repName == null) repName = isAmharic ? "ያልታወቀ" : "Unknown";
         if(repUser == null) repUser = isAmharic ? "ያልታወቀ" : "Unknown";
 
+        String repPhone = doc.getString("reporterPhone");
+        if(repPhone == null || repPhone.isEmpty()) repPhone = isAmharic ? "አልቀረበም" : "Not provided";
+
         String translatedCat = getTranslatedCategory(cat);
         String translatedUrg = urg;
         if(isAmharic) {
@@ -844,7 +849,6 @@ public class SolverDashboardActivity extends AppCompatActivity {
             card.addView(tvDeadline);
         }
 
-        // 🔥 SPECIFIC DETAILS FORMATTER 🔥
         StringBuilder extraDetails = new StringBuilder();
         Map<String, Object> specifics = (Map<String, Object>) doc.get("specificDetails");
         if (specifics != null && !specifics.isEmpty()) {
@@ -858,7 +862,10 @@ public class SolverDashboardActivity extends AppCompatActivity {
         }
 
         TextView tvDetails = new TextView(this);
-        tvDetails.setText((isAmharic ? "መግለጫ: " : "Details: ") + desc + extraDetails.toString() + (isAmharic ? "\nሪፖርት የተደረገበት: " : "\nReported: ") + date);
+        tvDetails.setText((isAmharic ? "መግለጫ: " : "Details: ") + desc
+                + extraDetails.toString()
+                + "\n\n📞 " + (isAmharic ? "ስልክ: " : "Phone: ") + repPhone
+                + (isAmharic ? "\n📅 ሪፖርት የተደረገበት: " : "\n📅 Reported: ") + date);
         tvDetails.setTextColor(ContextCompat.getColor(this, R.color.text_secondary));
         tvDetails.setPadding(0, 0, 0, 20);
         tvDetails.setVisibility(View.GONE);
