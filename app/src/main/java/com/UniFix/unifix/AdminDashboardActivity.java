@@ -67,20 +67,16 @@ import java.util.Stack;
 
 public class AdminDashboardActivity extends AppCompatActivity {
 
-    // Language State
     boolean isAmharic = false;
 
-    // Navigation & Layouts
     LinearLayout tabLayoutContainer;
     Button btnTabReports, btnTabUsers, btnTabMessages, btnTabAnalytics, btnSettings;
     TextView tvMessageBadge, tvWelcomeName;
     LinearLayout containerReports, containerUsers, containerMessages, containerAnalytics;
 
-    // Global Alerts Bell
     TextView tvGlobalAlertBadge;
     List<DocumentSnapshot> activeSystemAlerts = new ArrayList<>();
 
-    // Overview Elements
     TextView tvTechCount, tvDormCount, tvAcademicCount, tvCafeteriaCount, tvOtherCount;
     TextView tvHRCount, tvHealthCount, tvSecurityCount, tvFinanceCount, tvAdminCount;
 
@@ -89,7 +85,6 @@ public class AdminDashboardActivity extends AppCompatActivity {
     Button btnSearchHistory;
     LinearLayout listSearchResults, listUsers;
 
-    // Head Admin Elements
     LinearLayout sectionManualApprovals, listManualApprovals;
     LinearLayout adminInboxList;
     Button btnToggleAddStaff;
@@ -98,11 +93,9 @@ public class AdminDashboardActivity extends AppCompatActivity {
     Spinner spinNewStaffRole;
     Button btnCreateStaff;
 
-    // Sub-Tabs for Inbox
     Button btnSubTabInbox, btnSubTabSpam;
     boolean showingSpam = false;
 
-    // Advanced Analytics Elements
     PieChart pieChartCategory;
     BarChart barChartStatus, barChartSolver;
     TextView tvAnalyticsTotalReports, tvAnalyticsPending, tvAnalyticsResolved, tvAnalyticsTotalUsers;
@@ -118,12 +111,10 @@ public class AdminDashboardActivity extends AppCompatActivity {
 
     static boolean hasShownWelcomePopup = false;
 
-    // 🔥 TAB HISTORY & NAVIGATION TRACKING 🔥
     Stack<String> tabHistory = new Stack<>();
     String currentTab = "reports";
     long backPressedTime = 0;
 
-    // --- 🎨 UI HELPER METHODS ---
     private void styleFloatingCard(View v) {
         if (v != null) {
             GradientDrawable shape = new GradientDrawable();
@@ -171,11 +162,9 @@ public class AdminDashboardActivity extends AppCompatActivity {
         String userId = getIntent().getStringExtra("USERNAME");
         if (userId != null) loggedInUserName = userId;
 
-        // READ LANGUAGE PREFERENCE
         SharedPreferences prefs = getSharedPreferences("UniFixSettings", MODE_PRIVATE);
         isAmharic = prefs.getBoolean("isAmharic", false);
 
-        // 1. Link UI
         tvWelcomeName = findViewById(R.id.tvWelcomeName);
         tabLayoutContainer = findViewById(R.id.tabLayoutContainer);
         btnTabReports = findViewById(R.id.btnTabReports);
@@ -193,7 +182,6 @@ public class AdminDashboardActivity extends AppCompatActivity {
         makeInteractive(btnTabAnalytics);
         makeInteractive(btnSettings);
 
-        // 🔥 DYNAMIC SYSTEM ALERT BELL 🔥
         setupGlobalAlertBell();
 
         containerReports = findViewById(R.id.containerReports);
@@ -203,7 +191,6 @@ public class AdminDashboardActivity extends AppCompatActivity {
 
         listUsers = findViewById(R.id.listUsers);
 
-        // Chart & Analytics Linking
         pieChartCategory = findViewById(R.id.pieChartCategory);
         barChartStatus = findViewById(R.id.barChartStatus);
         barChartSolver = findViewById(R.id.barChartSolver);
@@ -287,7 +274,6 @@ public class AdminDashboardActivity extends AppCompatActivity {
         btnDownloadCSV.setOnClickListener(v -> generateCSV());
         btnDownloadPDF.setOnClickListener(v -> generatePDF());
 
-        // LINK CARD CLICKS TO PROPER CATEGORY NAMES
         if(findViewById(R.id.cardTechnology) != null) findViewById(R.id.cardTechnology).setOnClickListener(v -> openCategoryReports("Staff ICT Manager"));
         if(findViewById(R.id.cardDormitory) != null) findViewById(R.id.cardDormitory).setOnClickListener(v -> openCategoryReports("Staff Dormitory Manager"));
         if(findViewById(R.id.cardAcademic) != null) findViewById(R.id.cardAcademic).setOnClickListener(v -> openCategoryReports("Staff Academic Resources Manager"));
@@ -310,7 +296,6 @@ public class AdminDashboardActivity extends AppCompatActivity {
         makeInteractive(findViewById(R.id.cardAdmin));
         makeInteractive(findViewById(R.id.cardOther));
 
-        // SMART SEARCH SPINNER POPULATOR
         String[] searchCategories;
         if (isAmharic) {
             searchCategories = new String[]{"ሁሉም ምድቦች", "የአይሲቲ (ICT) ኃላፊ", "የመኝታ ክፍል ኃላፊ", "የአካዳሚክ ግብዓቶች ኃላፊ", "የካፌ ኃላፊ", "የሰው ኃይል ኃላፊ", "የጤና ጣቢያ ኃላፊ", "የካምፓስ ደህንነት ኃላፊ", "የፋይናንስ ኃላፊ", "የዩኒቨርሲቲ አስተዳደር", "አጠቃላይ ቴክኒሻን", "ዲን", "የትምህርት ክፍል ኃላፊ", "ሌላ"};
@@ -347,9 +332,6 @@ public class AdminDashboardActivity extends AppCompatActivity {
         switchToTab("reports", false);
     }
 
-    // ==========================================
-    // GLOBAL SYSTEM ALERTS (BELL ICON) - FIXED
-    // ==========================================
     private void setupGlobalAlertBell() {
         Button btnBell = findViewById(R.id.btnBell);
         tvGlobalAlertBadge = findViewById(R.id.tvGlobalAlertBadge);
@@ -421,7 +403,6 @@ public class AdminDashboardActivity extends AppCompatActivity {
         builder.show();
     }
 
-    // --- TRANSLATION MAPPER (CRUCIAL FOR FIREBASE) ---
     private String getTranslatedCategory(String englishCat) {
         if (!isAmharic) return englishCat;
         if (englishCat == null) return "ሌላ";
@@ -1220,7 +1201,6 @@ public class AdminDashboardActivity extends AppCompatActivity {
         layout.setPadding(40, 40, 40, 40);
         layout.setBackgroundColor(ContextCompat.getColor(this, R.color.card_background));
 
-        // Name
         final EditText etName = new EditText(this);
         etName.setHint(isAmharic ? "ሙሉ ስም" : "Full Name");
         if (currentName != null) etName.setText(currentName);
@@ -1231,7 +1211,6 @@ public class AdminDashboardActivity extends AppCompatActivity {
         etName.setLayoutParams(lp);
         layout.addView(etName);
 
-        // Phone
         final EditText etPhoneEdit = new EditText(this);
         etPhoneEdit.setHint(isAmharic ? "ስልክ ቁጥር" : "Phone Number");
         if (currentPhone != null) etPhoneEdit.setText(currentPhone);
@@ -1241,7 +1220,6 @@ public class AdminDashboardActivity extends AppCompatActivity {
         etPhoneEdit.setLayoutParams(lp);
         layout.addView(etPhoneEdit);
 
-        // Action Buttons
         Button btnSave = new Button(this);
         btnSave.setText(isAmharic ? "💾 መረጃ አስቀምጥ" : "💾 Save Info");
         btnSave.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#0d6efd")));
@@ -1285,7 +1263,6 @@ public class AdminDashboardActivity extends AppCompatActivity {
             layout.addView(btnRetract);
         }
 
-        // Issue Warning
         Button btnWarn = new Button(this);
         btnWarn.setText(isAmharic ? "⚠️ ማስጠንቀቂያ ስጥ (+1)" : "⚠️ Issue Warning (+1)");
         btnWarn.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#ffc107")));
@@ -1295,7 +1272,6 @@ public class AdminDashboardActivity extends AppCompatActivity {
         btnWarn.setOnClickListener(v -> issueWarning(uid, currentWarnings, uid));
         layout.addView(btnWarn);
 
-        // Delete User
         Button btnDelete = new Button(this);
         btnDelete.setText(isAmharic ? "🗑️ ተጠቃሚውን ሰርዝ" : "🗑️ Delete User");
         btnDelete.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#dc3545")));
@@ -1549,19 +1525,22 @@ public class AdminDashboardActivity extends AppCompatActivity {
         });
     }
 
-    private void resolveManualReview(String documentId, boolean isApproved) {
-        if (isApproved) {
-            db.collection("users").document(documentId)
+    private void resolveManualReview(String userId, boolean approve) {
+        if (approve) {
+            db.collection("users").document(userId)
                     .update("isPendingReview", false, "status", "Active")
                     .addOnSuccessListener(aVoid -> {
-                        Toast.makeText(this, isAmharic ? "መለያው ጸድቋል!" : "Account Approved!", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(this, isAmharic ? "መለያው ጸድቋል ✅" : "Account Approved ✅", Toast.LENGTH_SHORT).show();
+                        sendInAppNotification(userId, isAmharic ? "መለያዎ ጸድቋል" : "Account Approved",
+                                isAmharic ? "እንኳን ደስ አለዎት! መለያዎ በዋና አስተዳዳሪ ተረጋግጦ ጸድቋል። አሁን መግባት ይችላሉ።"
+                                        : "Congratulations! Your account has been manually verified and approved by the Head Admin. You can now log in.");
                         loadPendingManualReviews();
                         fetchAllUsersOnce();
                     });
         } else {
-            db.collection("users").document(documentId).delete()
+            db.collection("users").document(userId).delete()
                     .addOnSuccessListener(aVoid -> {
-                        Toast.makeText(this, isAmharic ? "ምዝገባው ውድቅ ተደርጎ ተሰርዟል።" : "Registration Rejected & Deleted.", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(this, isAmharic ? "መለያው ውድቅ ተደርጓል ❌" : "Account Rejected ❌", Toast.LENGTH_SHORT).show();
                         loadPendingManualReviews();
                     });
         }
@@ -1620,6 +1599,9 @@ public class AdminDashboardActivity extends AppCompatActivity {
                                 String repName = document.getString("reporterFullName");
                                 final String repUser = document.getString("reporterUsername");
 
+                                String repPhone = document.getString("reporterPhone");
+                                if(repPhone == null || repPhone.isEmpty()) repPhone = isAmharic ? "አልቀረበም" : "Not provided";
+
                                 if (repName == null) repName = "Unknown User";
                                 if (assignedTime == null) assignedTime = currentTime;
                                 boolean isOverdue = (currentTime - assignedTime) > fortyEightHours;
@@ -1646,8 +1628,23 @@ public class AdminDashboardActivity extends AppCompatActivity {
                                 tvReporter.setTypeface(null, android.graphics.Typeface.BOLD);
                                 card.addView(tvReporter);
 
+                                StringBuilder extraDetails = new StringBuilder();
+                                Map<String, Object> specifics = (Map<String, Object>) document.get("specificDetails");
+                                if (specifics != null && !specifics.isEmpty()) {
+                                    extraDetails.append(isAmharic ? "\n\n📍 የተወሰኑ ዝርዝሮች:\n" : "\n\n📍 Specific Details:\n");
+                                    for (Map.Entry<String, Object> entry : specifics.entrySet()) {
+                                        String key = entry.getKey();
+                                        key = key.substring(0, 1).toUpperCase() + key.substring(1);
+                                        key = key.replaceAll("([A-Z])", " $1").trim();
+                                        extraDetails.append("• ").append(key).append(": ").append(entry.getValue()).append("\n");
+                                    }
+                                }
+
                                 TextView tvInfo = new TextView(this);
-                                tvInfo.setText((isAmharic ? "የአሁኑ ባለሙያ: " : "Current Solver: ") + (currentSolver != null ? currentSolver : (isAmharic ? "የለም" : "None")) + "\n\n" + (isAmharic ? "የችግሩ ዝርዝር:" : "Issue Details:") + "\n" + desc);
+                                tvInfo.setText((isAmharic ? "የአሁኑ ባለሙያ: " : "Current Solver: ") + (currentSolver != null ? currentSolver : (isAmharic ? "የለም" : "None"))
+                                        + "\n\n" + (isAmharic ? "የችግሩ ዝርዝር:" : "Issue Details:") + "\n" + desc
+                                        + extraDetails.toString()
+                                        + "\n\n📞 " + (isAmharic ? "ስልክ: " : "Phone: ") + repPhone);
                                 tvInfo.setTextColor(ContextCompat.getColor(this, R.color.text_primary));
                                 tvInfo.setPadding(0, 8, 0, 0);
                                 tvInfo.setVisibility(View.GONE);
@@ -1959,8 +1956,25 @@ public class AdminDashboardActivity extends AppCompatActivity {
                                 tvStatus.setText((isAmharic ? "ሁኔታ: " : "Status: ") + status);
                                 tvStatus.setTextColor("Completed".equals(status) ? Color.parseColor("#28a745") : Color.parseColor("#FFB300"));
 
+                                String repPhone = document.getString("reporterPhone");
+                                if(repPhone == null || repPhone.isEmpty()) repPhone = isAmharic ? "አልቀረበም" : "Not provided";
+
+                                StringBuilder extraDetails = new StringBuilder();
+                                Map<String, Object> specifics = (Map<String, Object>) document.get("specificDetails");
+                                if (specifics != null && !specifics.isEmpty()) {
+                                    extraDetails.append(isAmharic ? "\n\n📍 የተወሰኑ ዝርዝሮች:\n" : "\n\n📍 Specific Details:\n");
+                                    for (Map.Entry<String, Object> entry : specifics.entrySet()) {
+                                        String key = entry.getKey();
+                                        key = key.substring(0, 1).toUpperCase() + key.substring(1);
+                                        key = key.replaceAll("([A-Z])", " $1").trim();
+                                        extraDetails.append("• ").append(key).append(": ").append(entry.getValue()).append("\n");
+                                    }
+                                }
+
                                 TextView tvDesc = new TextView(this);
-                                tvDesc.setText("\n" + (isAmharic ? "መግለጫ:\n" : "Description:\n") + desc);
+                                tvDesc.setText("\n" + (isAmharic ? "መግለጫ:\n" : "Description:\n") + desc
+                                        + extraDetails.toString()
+                                        + "\n\n📞 " + (isAmharic ? "ስልክ: " : "Phone: ") + repPhone);
                                 tvDesc.setTextColor(Color.parseColor("#333333"));
                                 tvDesc.setVisibility(View.GONE);
 
@@ -2007,7 +2021,6 @@ public class AdminDashboardActivity extends AppCompatActivity {
                                 card.addView(tvStatus);
                                 card.addView(tvDesc);
 
-                                // Dynamic Deadline Logic for search results
                                 if (assignedTime != null && ("Assigned".equals(status) || "In Progress".equals(status))) {
                                     long duration = 48L * 60 * 60 * 1000;
                                     if ("Urgent".equals(urgency)) duration = 1L * 60 * 60 * 1000;
